@@ -1,0 +1,21 @@
+# Node
+backend/node_modules/
+frontend/node_modules/
+
+# Python
+ml-service/venv/
+ml-service/__pycache__/
+ml-service/model/__pycache__/
+*.pyc
+
+# Environment files (SECRET!)
+backend/.env
+
+# Large files
+ml-service/model/Fake.csv
+ml-service/model/True.csv
+ml-service/model/Fake.csv.zip
+ml-service/model/True.csv.zip
+
+# Build
+frontend/build/
