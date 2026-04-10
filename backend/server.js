@@ -40,7 +40,11 @@ app.use('/api/analyze', analyzeLimiter);
 
 // ─── CORS Configuration ───────────────────────────────────────────────────────
 app.use(cors({
-  origin: [process.env.CLIENT_URL || 'http://localhost:3000'],
+ origin: [
+  process.env.CLIENT_URL || 'http://localhost:3000',
+  'https://fake-news-detector-eta-dun.vercel.app',
+  /\.vercel\.app$/,
+],
   methods: ['GET', 'POST', 'DELETE', 'PUT', 'PATCH'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
