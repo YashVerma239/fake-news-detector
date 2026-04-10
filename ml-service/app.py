@@ -24,18 +24,23 @@ model = None
 def load_model():
     """Load the trained ML model. Train it first if not found."""
     global model
-    if os.path.exists(MODEL_PATH):
-        print(f"✅ Loading model from {MODEL_PATH}")
-        model = joblib.load(MODEL_PATH)
-        print("✅ Model loaded successfully!")
-    else:
-        print("⚠️  Model not found. Training now (first-time setup)...")
-        # Import and run training script
-        sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'model'))
-        from train_model import train_and_save
-        model = train_and_save()
-        print("✅ Model trained and ready!")
-
+    try:
+        if os.path.exists(MODEL_PATH):
+            print(f"✅ Loading model from {MODEL_PATH}")
+            model = joblib.load(MODEL_PATH)
+            print("✅ Model loaded successfully!")
+        else:
+            print(f"⚠️ Model not found at {MODEL_PATH}")
+            print(f"📁 Current dir: {os.getcwd()}")
+            print(f"📁 Dir contents: {os.listdir(os.path.dirname(MODEL_PATH))}")
+            sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'model'))
+            from train_model import train_and_save
+            model = train_and_save()
+            print("✅ Model trained and ready!")
+    except Exception as e:
+        print(f"❌ Model load error: {e}")
+        import traceback
+        traceback.print_exc()
 
 # Load model at startup
 load_model()
